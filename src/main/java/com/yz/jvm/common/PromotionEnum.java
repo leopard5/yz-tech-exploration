@@ -24,6 +24,7 @@ public enum PromotionEnum {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
+
+
 	
 }

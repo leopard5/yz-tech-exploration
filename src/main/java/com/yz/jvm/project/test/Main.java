@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.yz.jvm.common.PromotionEnum;
 import com.yz.jvm.util.FileUtil;
 
 public class Main {
