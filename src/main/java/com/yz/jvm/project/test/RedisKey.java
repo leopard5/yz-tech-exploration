@@ -1,5 +1,7 @@
 package com.yz.jvm.project.test;
 
+import com.yz.jvm.common.PromotionEnum;
+
 public class RedisKey {
 	public static final String SEPARATOR = ":";
 	public static final String PREFIX = "promotion:";
