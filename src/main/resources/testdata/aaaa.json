@@ -1,0 +1,32 @@
+[
+    {
+        "store":8249,
+        "skuIds":[
+            {
+                "skuId":"8000187",
+                "skuStock":"50",
+                "promotion":3078
+            },
+            {
+                "skuId":"10234820",
+                "skuStock":"20",
+                "promotion":823
+            }
+        ]
+    },
+    {
+        "store":8250,
+        "skuIds":[
+            {
+                "skuId":"8000188",
+                "skuStock":"90",
+                "promotion":2000
+            },
+            {
+                "skuId":"10234821",
+                "skuStock":"500",
+                "promotion":600
+            }
+        ]
+    }
+]

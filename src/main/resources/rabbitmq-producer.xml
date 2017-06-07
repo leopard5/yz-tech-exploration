@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/rabbit
+                http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+
+	<!-- 连接服务配置 -->
+	<rabbit:connection-factory id="connectionFactory" host="liuzhaoqiang128" username="admin" password="admin" port="5672" />
+
+	<rabbit:admin connection-factory="connectionFactory" />
+
+	<!-- queue 队列声明 -->
+	<rabbit:queue id="queue_one" durable="true" auto-delete="false"
+		exclusive="false" name="queue_one" />
+	<!--direct: exchange queue binging key 绑定 -->
+	<!--<rabbit:direct-exchange name="my-mq-exchange" durable="true" auto-delete="false" 
+		id="my-mq-exchange"> <rabbit:bindings> <rabbit:binding queue="queue_one" 
+		key="queue_one_key"/> </rabbit:bindings> </rabbit:direct-exchange> -->
+	<!--topic: exchange queue binging key 绑定 -->
+	<rabbit:topic-exchange name="myexchange1"
+		durable="true" auto-delete="false" id="myexchange1">
+		<rabbit:bindings>
+			<rabbit:binding queue="queue_one" pattern="foo.*"></rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+	<!--fanout: exchange queue binging key 绑定 -->
+	<!--<rabbit:fanout-exchange name="myexchange2" durable="true" auto-delete="false" 
+		id="myexchange1"> -->
+	<!--<rabbit:bindings> -->
+	<!--<rabbit:binding queue="queue_one"></rabbit:binding> -->
+	<!--</rabbit:bindings> -->
+	<!--</rabbit:fanout-exchange> -->
+	<!-- spring amqp默认的是jackson 的一个插件,目的将生产者生产的数据转换为json存入消息队列 -->
+	<bean id="jsonMessageConverter"
+		class="com.rayootech.rabbitmq.demo.springamqp.FastJsonMessageConverter"></bean>
+	<!-- spring template声明 -->
+	<!--direct -->
+	<!--<rabbit:template exchange="my-mq-exchange" id="amqpTemplate" connection-factory="connectionFactory" 
+		message-converter="jsonMessageConverter"/> -->
+	<!--topic -->
+	<rabbit:template exchange="myexchange1" id="amqpTemplate"
+		connection-factory="connectionFactory" message-converter="jsonMessageConverter"
+		routing-key="foo.bar" />
+	<!--fanout -->
+	<!-- <rabbit:template exchange="myexchange2" id="amqpTemplate" connection-factory="connectionFactory" 
+		message-converter="jsonMessageConverter"/> -->
+
+</beans>

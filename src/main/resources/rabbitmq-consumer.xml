@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/rabbit
+                http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+
+	<!-- 连接服务配置 -->
+	<rabbit:connection-factory id="connectionFactory"
+		host="liuzhaoqiang129" username="admin" password="admin" port="5672" />
+	<rabbit:admin connection-factory="connectionFactory" />
+	<!-- queue 队列声明 -->
+	<rabbit:queue id="queue_one" durable="true" auto-delete="false"
+		exclusive="false" name="queue_one" />
+	<!--fanout: exchange queue binging key 绑定 -->
+	<!--<rabbit:fanout-exchange name="myexchange2" durable="true" auto-delete="false" 
+		id="myexchange2"> -->
+	<!--<rabbit:bindings> -->
+	<!--<rabbit:binding queue="queue_one"></rabbit:binding> -->
+	<!--</rabbit:bindings> -->
+	<!--</rabbit:fanout-exchange> -->
+	<!--topic: exchange queue binging key 绑定 -->
+	<rabbit:topic-exchange name="myexchange1"
+		durable="true" auto-delete="false" id="myexchange1">
+		<rabbit:bindings>
+			<rabbit:binding queue="queue_one" pattern="foo.*"></rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+	<!--direct: exchange queue binging key 绑定 -->
+	<!-- <rabbit:direct-exchange name="my-mq-exchange" durable="true" auto-delete="false" 
+		id="my-mq-exchange"> <rabbit:bindings> <rabbit:binding queue="queue_one" 
+		key="queue_one_key"/> </rabbit:bindings> </rabbit:direct-exchange> -->
+	<bean id="consumerMessage" class="com.rayootech.rabbitmq.demo.springamqp.ConsumeMessage"></bean>
+	<!-- 配置线程池 -->
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 线程池维护线程的最少数量 -->
+		<property name="corePoolSize" value="5" />
+		<!-- 线程池维护线程所允许的空闲时间 -->
+		<property name="keepAliveSeconds" value="30000" />
+		<!-- 线程池维护线程的最大数量 -->
+		<property name="maxPoolSize" value="1000" />
+		<!-- 线程池所使用的缓冲队列 -->
+		<property name="queueCapacity" value="200" />
+	</bean>
+	<!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
+	<rabbit:listener-container
+		connection-factory="connectionFactory" acknowledge="auto"
+		task-executor="taskExecutor">
+		<rabbit:listener queues="queue_one" ref="consumerMessage" />
+	</rabbit:listener-container>
+	
+</beans>
