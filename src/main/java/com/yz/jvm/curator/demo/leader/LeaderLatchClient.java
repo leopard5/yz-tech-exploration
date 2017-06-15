@@ -44,6 +44,8 @@ public class LeaderLatchClient implements Closeable {
 		leaderLatch.close();
 	}
 
+
+
 	public boolean isLeader() {
 		return leaderLatch.hasLeadership();
 	}
