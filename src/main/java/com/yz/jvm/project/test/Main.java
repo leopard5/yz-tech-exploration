@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.alibaba.fastjson.JSON;
+import com.sun.org.apache.xerces.internal.dom.PSVIAttrNSImpl;
 import com.yz.jvm.util.FileUtil;
 
 public class Main {
@@ -33,8 +34,14 @@ public class Main {
 			System.out.println("error");
 		}
 	}
-	
-	
+
+
+	public static void testPosifx(Integer test) {
+		if (test != null) {
+
+		}
+	}
+
 	public static void aaaa(){
 		String app = "";
 		try {
