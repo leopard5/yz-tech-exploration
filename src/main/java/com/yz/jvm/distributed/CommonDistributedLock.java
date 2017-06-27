@@ -12,7 +12,7 @@ public class CommonDistributedLock {
     private final String lockName;
     private String lockPath;
 
-    public DistributedLock(ZooKeeper zk, String lockBasePath, String lockName) {
+    public CommonDistributedLock(ZooKeeper zk, String lockBasePath, String lockName) {
         this.zk = zk;
         this.lockBasePath = lockBasePath;
         this.lockName = lockName;
