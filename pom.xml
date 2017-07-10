@@ -224,17 +224,95 @@
 
     </dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<!--在jdk7环境 关闭此配置否则会报：Exit code: 1 - javadoc: 错误 - 无效的标记: -Xdoclint:none-->
+						<!--jdk8需要开启此选项 用于关闭doclint 对无参数注解的检查-->
+						<!--doclint link: http://openjdk.java.net/jeps/172
+                        单独执行 mvn javadoc:javadoc 在jdk1.8需要增加 -Dadditionalparam=-Xdoclint:none
+                         解决jdk6,7,8都兼容 方案：http://jdpgrailsdev.github.io/blog/2014/04/03/maven_java8_javadoc.html-->
+						<configuration>
+							<additionalparam>${javadoc.opts}</additionalparam>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<charset>UTF-8</charset>
+				</configuration>
+			</plugin>
+			<!-- 指定maven编译的jdk版本 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>2.7.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+					<check/>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>cobertura</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!--只有使用jdk1.8或更高的版本才激活-->
 	<profiles>
 		<profile>
-			<id>jdk-1.7</id>
+			<id>java8-doclint-disabled</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
-				<jdk>1.7</jdk>
+				<jdk>[1.8,)</jdk>
 			</activation>
 			<properties>
-				<maven.compiler.source>1.7</maven.compiler.source>
-				<maven.compiler.target>1.7</maven.compiler.target>
-				<maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
+				<javadoc.opts>-Xdoclint:none</javadoc.opts>
 			</properties>
 		</profile>
 	</profiles>
