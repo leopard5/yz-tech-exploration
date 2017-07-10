@@ -1,12 +1,15 @@
 package com.yz.jvm.test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.*;
 
+import com.alibaba.fastjson.JSON;
+import com.yz.jvm.test.convertor.TestConvertor;
+import com.yz.jvm.test.dto.TestReq;
+import com.yz.jvm.test.dto.TestVo;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -38,10 +41,38 @@ public class MainDemo {
 		// conditionDebugPoint(999);
 
 		// jion测试
-		 joinTest(20);
-		Integer aaa = 890;
+//		 joinTest(20);
+//		Integer aaa = 890;
+
+//		TestVo vo  = new TestVo();
+//		vo.setId(123);
+//		vo.setName("ddddd");
+//		vo.setIds(Arrays.asList("tt","yy"));
+//
+//		TestReq testReq = TestConvertor.toTestReq(vo);
+//		System.out.println(JSON.toJSONString(testReq));
+
+		try {
+			String aaa = "aaaa";
+			System.out.println(aaa);
+
+			if (aaa == null) {
+
+            }
+
+
+			List<String> alsit = new ArrayList<String>();
+			for (String s : alsit) {
+
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
 
 	}
+
+
 
 	public static void joinTest(final int count) {
 		Thread thread = null;
@@ -109,6 +140,7 @@ public class MainDemo {
 		// 去掉"-"符号
 		String temp = str.replaceAll("\\-", "");
 		return str + "," + temp;
+
 	}
 
 	public static void getSemahporeTest() {
