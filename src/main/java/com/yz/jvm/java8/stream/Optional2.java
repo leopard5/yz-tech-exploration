@@ -8,7 +8,7 @@ import java.util.function.Supplier;
  * <p>
  * http://winterbe.com/posts/2015/03/15/avoid-null-checks-in-java/
  *
- * @author Benjamin Winterberg
+ * @author yazhong.qi
  */
 public class Optional2 {
 
