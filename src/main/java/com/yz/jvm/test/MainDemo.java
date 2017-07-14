@@ -52,28 +52,14 @@ public class MainDemo {
 //		TestReq testReq = TestConvertor.toTestReq(vo);
 //		System.out.println(JSON.toJSONString(testReq));
 
-		try {
-			String aaa = "aaaa";
-			System.out.println(aaa);
 
-			if (aaa == null) {
-
-            }
-
-
-			List<String> alsit = new ArrayList<String>();
-			for (String s : alsit) {
-
-            }
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-		}
 
 	}
 
 
+	public static void test(String name){
 
+	}
 	public static void joinTest(final int count) {
 		Thread thread = null;
 		for (int i = 0; i < count; i++) {

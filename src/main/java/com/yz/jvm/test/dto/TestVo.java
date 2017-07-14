@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class TestVo implements Serializable{
+    private static final long serialVersionUID = -8357733950522752993L;
+
     private Integer id;
     private String name;
     private List<String> ids;
