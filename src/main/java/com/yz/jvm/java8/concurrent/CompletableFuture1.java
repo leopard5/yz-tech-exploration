@@ -3,9 +3,6 @@ package com.yz.jvm.java8.concurrent;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-/**
- * @author Benjamin Winterberg
- */
 public class CompletableFuture1 {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {

@@ -3,9 +3,6 @@ package com.yz.jvm.java8.concurrent;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 
-/**
- * @author Benjamin Winterberg
- */
 public class ConcurrentHashMap1 {
 
     public static void main(String[] args) {

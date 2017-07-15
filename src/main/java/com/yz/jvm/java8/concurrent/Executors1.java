@@ -4,9 +4,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Benjamin Winterberg
- */
 public class Executors1 {
 
     public static void main(String[] args) {

@@ -3,9 +3,6 @@ package com.yz.jvm.java8.concurrent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author Benjamin Winterberg
- */
 public class ConcurrentUtils {
 
     public static void stop(ExecutorService executor) {
