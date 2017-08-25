@@ -1,4 +1,4 @@
-package com.yz.jvm.test.convertor;
+package com.yz.jvm.convertor;
 
 import com.yz.jvm.test.dto.TestReq;
 import com.yz.jvm.test.dto.TestVo;
