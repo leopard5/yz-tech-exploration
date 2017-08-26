@@ -1,4 +1,4 @@
-package com.yz.jvm.convertor;
+package com.yz.jvm.copyproperties;
 
 import com.yz.jvm.test.dto.TestReq;
 import com.yz.jvm.test.dto.TestVo;
@@ -14,5 +14,13 @@ public class TestConvertor {
         TestReq target = new TestReq();
         TEST_REQ.copy(vo, target, null);
         return target;
+    }
+
+    public static void testProperiesCopy(){
+        // 1.BeanCopier
+        // 2.org.apache.commons.beanutils.BeanUtils
+        // 3.Dozer
+
+
     }
 }
