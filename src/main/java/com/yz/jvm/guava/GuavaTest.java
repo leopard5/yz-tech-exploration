@@ -6,9 +6,12 @@ import com.google.common.base.Splitter;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class GuavaTest {
-    /* Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、
-     原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、
-     字符串处理 [string processing] 、I/O 等等。
+    /*
+    http://ifeve.com/google-guava/
+
+    Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、
+    原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、
+    字符串处理 [string processing] 、I/O 等等。
      1. 基本工具 [Basic utilities]
         让使用Java语言变得更舒适
 
