@@ -14,17 +14,6 @@ import net.sf.cglib.asm.ClassWriter;
 import net.sf.cglib.asm.MethodVisitor;
 import net.sf.cglib.asm.Opcodes;
 
-/**
- * @CopyRright (c)2015-2017: <My Company>
- * @Project: <study>
- * @Comments: <MytestMain>
- * @JDK 1.7
- * @Author: <yazhong.qi>
- * @email : <qiyazhong@163.com>
- * @Create Date: <2016-12-20>
- * @Modify Date: <2016-12-20>
- * @Version: <1.0>
- */
 public class MytestMain {
 	public static void main(String[] args) {
 		// asmGenerateClass();

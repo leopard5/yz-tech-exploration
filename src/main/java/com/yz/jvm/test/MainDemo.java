@@ -39,10 +39,6 @@ public class MainDemo {
 //		vo.setName("ddddd");
 //		vo.setIds(Arrays.asList("tt","yy"));
 //
-//		TestReq testReq = TestConvertor.toTestReq(vo);
-//		System.out.println(JSON.toJSONString(testReq));
-
-
 
 	}
 

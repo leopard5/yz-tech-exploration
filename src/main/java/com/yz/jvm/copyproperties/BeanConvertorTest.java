@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 // 2.org.apache.commons.beanutils.BeanUtils
 // BeanUtils.copyProperties VS PropertyUtils.copyProperties
 // 3.Dozer
-public class TestConvertor {
+public class BeanConvertorTest {
     private static final BeanCopier TEST_REQ = BeanCopier.create(TestVo.class, TestReq.class, false);
 
     public static TestReq toTestReq(TestVo vo) {
