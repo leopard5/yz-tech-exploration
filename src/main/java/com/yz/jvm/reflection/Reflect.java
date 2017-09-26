@@ -19,19 +19,13 @@ public class Reflect {
             // 获取方法注解
             Annotation[] annotations = method.getDeclaredAnnotations();
             for(Annotation annotation : annotations){
-
             }
 
             // 获取方法参数注解
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
             Class[] parameterTypesAA = method.getParameterTypes();
-
-
         }
-
-
         Constructor[] constructors = aClass.getConstructors();
-
         Field[] fields = aClass.getFields();
         for (Field field : fields) {
             System.out.println("field = " + field.getName() + ",type=" + field.getType());
@@ -41,19 +35,11 @@ public class Reflect {
             for(Annotation annotation : annotations) {
             }
 
-
 //            Annotation annotation = field.getAnnotation(Count.class);
-
-
-
         }
-
-
         Annotation[] annotations = aClass.getAnnotations();
         for (Annotation annotation : annotations) {
         }
-
-
     }
 
     public static void printGettersSetters(Class aClass) {
@@ -63,7 +49,6 @@ public class Reflect {
             if (isSetter(method)) System.out.println("setter: " + method);
         }
     }
-
 
     public static boolean isGetter(Method method) {
         if (!method.getName().startsWith("get")) return false;
@@ -75,6 +60,4 @@ public class Reflect {
         if (!method.getName().startsWith("set")) return false;
         return method.getParameterTypes().length == 1;
     }
-
-
 }
