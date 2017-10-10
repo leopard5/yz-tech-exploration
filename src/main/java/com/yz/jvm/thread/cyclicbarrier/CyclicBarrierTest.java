@@ -9,7 +9,6 @@ import java.util.concurrent.CyclicBarrier;
  * TODO  
  * @author yazhong
  * @date   2015年8月13日 上午10:35:16 
- * @Copyright 2015, 唯创国际 幸福9号 All Rights Reserved. 
  * @version   1.0
  */
 

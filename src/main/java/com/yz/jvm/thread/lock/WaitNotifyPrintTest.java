@@ -6,7 +6,6 @@ package com.yz.jvm.thread.lock;
  * 
  * @author yazhong
  * @date 2015年8月31日 下午5:14:56
- * @Copyright 2015, 唯创国际 幸福9号 All Rights Reserved.
  * @version 1.0
  */
 /**
