@@ -1,4 +1,4 @@
-package com.yz.jvm.netty;
+package com.yz.jvm.netty.basic;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
