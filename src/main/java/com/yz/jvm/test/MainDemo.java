@@ -1,8 +1,10 @@
 package com.yz.jvm.test;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.*;
 
+import com.alibaba.fastjson.JSON;
 import org.openjdk.jmh.runner.RunnerException;
 
 import com.yz.jvm.thread.callable.CallableTest;
@@ -39,6 +41,17 @@ public class MainDemo {
 //		vo.setName("ddddd");
 //		vo.setIds(Arrays.asList("tt","yy"));
 //
+
+		try {
+			String strJson = "[4445]";
+			List<Integer> aaaa = JSON.parseArray(strJson, Integer.class);
+			System.out.println(aaaa);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("aaaa");
+		} finally {
+		}
+
 
 	}
 
