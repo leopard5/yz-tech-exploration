@@ -21,8 +21,8 @@ public class TestStream {
 
         beanList.add(bean1);
         beanList.add(bean2);
+        beanList.add(bean3);
 
         StringBuilder sb = new StringBuilder(100);
-
     }
 }
