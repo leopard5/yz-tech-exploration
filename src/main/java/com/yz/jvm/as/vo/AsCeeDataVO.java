@@ -84,4 +84,27 @@ public class AsCeeDataVO {
     public void setSpinalMobility(BigDecimal spinalMobility) {
         this.spinalMobility = spinalMobility;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AsCeeDataVO that = (AsCeeDataVO) o;
+
+        if (getBasfi() != null ? !getBasfi().equals(that.getBasfi()) : that.getBasfi() != null) return false;
+        if (getInflammatoryReact() != null ? !getInflammatoryReact().equals(that.getInflammatoryReact()) : that.getInflammatoryReact() != null)
+            return false;
+        if (getCrp() != null ? !getCrp().equals(that.getCrp()) : that.getCrp() != null) return false;
+        return getSpinalMobility() != null ? getSpinalMobility().equals(that.getSpinalMobility()) : that.getSpinalMobility() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getBasfi() != null ? getBasfi().hashCode() : 0;
+        result = 31 * result + (getInflammatoryReact() != null ? getInflammatoryReact().hashCode() : 0);
+        result = 31 * result + (getCrp() != null ? getCrp().hashCode() : 0);
+        result = 31 * result + (getSpinalMobility() != null ? getSpinalMobility().hashCode() : 0);
+        return result;
+    }
 }
