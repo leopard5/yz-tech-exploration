@@ -6,6 +6,7 @@ import com.yz.jvm.as.AsCalcTools;
 import com.yz.jvm.as.vo.AsCeeDataVO;
 import com.yz.jvm.as.vo.AsResultVO;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -88,7 +89,7 @@ public class ReadExcel {
             //遍历每行内容从行号为0开始
             for (int rowIndex = 0; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
                 XSSFRow row = sheet.getRow(rowIndex);
-                if (row == null || rowIndex == 0) {
+                if (row == null || rowIndex == 0 || rowIndex == 1) {
                     continue;
                 }
                 List<AsResultVO> difResult = new ArrayList<>();
@@ -120,90 +121,96 @@ public class ReadExcel {
 
                 for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
                     XSSFCell cell = row.getCell(cellNum);
-                    if (cell != null) {
+                    Double cellValue = null;
+                    if (cell == null) {
+                        cellValue = 0.0;
+                    } else {
+                        cellValue = cell.getNumericCellValue();
+                    }
+//                    if (cell != null) {
                        switch (cellNum) {
                            case 0:
-                               vo1.setDataNo(Long.valueOf(new Double(cell.getNumericCellValue()).longValue()));
-                               vo2.setDataNo(Long.valueOf(new Double(cell.getNumericCellValue()).longValue()));
-                               vo3.setDataNo(Long.valueOf(new Double(cell.getNumericCellValue()).longValue()));
-                               vo4.setDataNo(Long.valueOf(new Double(cell.getNumericCellValue()).longValue()));
-                               vo5.setDataNo(Long.valueOf(new Double(cell.getNumericCellValue()).longValue()));
-                               vo6.setDataNo(Long.valueOf(new Double(cell.getNumericCellValue()).longValue()));
-                               vo7.setDataNo(Long.valueOf(new Double(cell.getNumericCellValue()).longValue()));
+                               vo1.setDataNo(Long.valueOf(cellValue.longValue()));
+                               vo2.setDataNo(Long.valueOf(cellValue.longValue()));
+                               vo3.setDataNo(Long.valueOf(cellValue.longValue()));
+                               vo4.setDataNo(Long.valueOf(cellValue.longValue()));
+                               vo5.setDataNo(Long.valueOf(cellValue.longValue()));
+                               vo6.setDataNo(Long.valueOf(cellValue.longValue()));
+                               vo7.setDataNo(Long.valueOf(cellValue.longValue()));
                                break;
                            case 1:
-                               vo1.setCenterNo(Integer.valueOf(new Double(cell.getNumericCellValue()).intValue()));
-                               vo2.setCenterNo(Integer.valueOf(new Double(cell.getNumericCellValue()).intValue()));
-                               vo3.setCenterNo(Integer.valueOf(new Double(cell.getNumericCellValue()).intValue()));
-                               vo4.setCenterNo(Integer.valueOf(new Double(cell.getNumericCellValue()).intValue()));
-                               vo5.setCenterNo(Integer.valueOf(new Double(cell.getNumericCellValue()).intValue()));
-                               vo6.setCenterNo(Integer.valueOf(new Double(cell.getNumericCellValue()).intValue()));
-                               vo7.setCenterNo(Integer.valueOf(new Double(cell.getNumericCellValue()).intValue()));
+                               vo1.setCenterNo(Integer.valueOf(cellValue.intValue()));
+                               vo2.setCenterNo(Integer.valueOf(cellValue.intValue()));
+                               vo3.setCenterNo(Integer.valueOf(cellValue.intValue()));
+                               vo4.setCenterNo(Integer.valueOf(cellValue.intValue()));
+                               vo5.setCenterNo(Integer.valueOf(cellValue.intValue()));
+                               vo6.setCenterNo(Integer.valueOf(cellValue.intValue()));
+                               vo7.setCenterNo(Integer.valueOf(cellValue.intValue()));
                                break;
                            case 2:
-                               baseLine.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               baseLine.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 3:
-                               baseLine.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               baseLine.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 4:
-                               baseLine.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               baseLine.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 5:
-                               baseLine.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               baseLine.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 6:
-                               baseLine.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               baseLine.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 7:
-                               baseLine.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               baseLine.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            // dif1 start
                            case 8:
-                               data1.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data1.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 9:
-                               data1.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data1.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 10:
-                               data1.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data1.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 11:
-                               data1.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data1.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 12:
-                               data1.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data1.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 13:
-                               data1.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data1.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            case 14:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsas20(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsas20(false);
                                }
                                break;
                            case 15:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsas40(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsas40(false);
                                }
                                break;
                            case 16:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsasPr(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsasPr(false);
                                }
                                break;
                            case 17:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsas56(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData1.setAsas56(false);
                                }
                                break;
@@ -211,49 +218,49 @@ public class ReadExcel {
 
                             // dif2 start
                            case 18:
-                               data2.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data2.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 19:
-                               data2.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data2.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 20:
-                               data2.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data2.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 21:
-                               data2.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data2.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 22:
-                               data2.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data2.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 23:
-                               data2.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data2.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            case 24:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsas20(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsas20(false);
                                }
                                break;
                            case 25:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsas40(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsas40(false);
                                }
                                break;
                            case 26:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsasPr(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsasPr(false);
                                }
                                break;
                            case 27:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsas56(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData2.setAsas56(false);
                                }
                                break;
@@ -261,49 +268,49 @@ public class ReadExcel {
 
                            // dif3 start
                            case 28:
-                               data3.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data3.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 29:
-                               data3.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data3.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 30:
-                               data3.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data3.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 31:
-                               data3.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data3.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 32:
-                               data3.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data3.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 33:
-                               data3.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data3.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            case 34:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsas20(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsas20(false);
                                }
                                break;
                            case 35:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsas40(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsas40(false);
                                }
                                break;
                            case 36:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsasPr(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsasPr(false);
                                }
                                break;
                            case 37:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsas56(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData3.setAsas56(false);
                                }
                                break;
@@ -311,49 +318,49 @@ public class ReadExcel {
 
                            // dif4 start
                            case 38:
-                               data4.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data4.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 39:
-                               data4.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data4.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 40:
-                               data4.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data4.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 41:
-                               data4.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data4.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 42:
-                               data4.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data4.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 43:
-                               data4.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data4.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            case 44:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsas20(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsas20(false);
                                }
                                break;
                            case 45:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsas40(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsas40(false);
                                }
                                break;
                            case 46:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsasPr(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsasPr(false);
                                }
                                break;
                            case 47:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsas56(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData4.setAsas56(false);
                                }
                                break;
@@ -361,49 +368,49 @@ public class ReadExcel {
 
                            // dif5 start
                            case 48:
-                               data5.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data5.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 49:
-                               data5.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data5.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 50:
-                               data5.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data5.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 51:
-                               data5.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data5.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 52:
-                               data5.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data5.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 53:
-                               data5.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data5.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            case 54:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsas20(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsas20(false);
                                }
                                break;
                            case 55:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsas40(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsas40(false);
                                }
                                break;
                            case 56:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsasPr(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsasPr(false);
                                }
                                break;
                            case 57:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsas56(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData5.setAsas56(false);
                                }
                                break;
@@ -411,49 +418,49 @@ public class ReadExcel {
 
                            // dif6 start
                            case 58:
-                               data6.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data6.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 59:
-                               data6.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data6.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 60:
-                               data6.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data6.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 61:
-                               data6.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data6.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 62:
-                               data6.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data6.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 63:
-                               data6.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data6.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            case 64:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsas20(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsas20(false);
                                }
                                break;
                            case 65:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsas40(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsas40(false);
                                }
                                break;
                            case 66:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsasPr(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsasPr(false);
                                }
                                break;
                            case 67:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsas56(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData6.setAsas56(false);
                                }
                                break;
@@ -461,49 +468,49 @@ public class ReadExcel {
 
                            // dif7 start
                            case 68:
-                               data7.setPainScore(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data7.setPga(BigDecimal.valueOf(cellValue));
                                break;
                            case 69:
-                               data7.setPga(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data7.setPainScore(BigDecimal.valueOf(cellValue));
                                break;
                            case 70:
-                               data7.setInflammatoryReact(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data7.setBasfi(BigDecimal.valueOf(cellValue));
                                break;
                            case 71:
-                               data7.setBasfi(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data7.setInflammatoryReact(BigDecimal.valueOf(cellValue));
                                break;
                            case 72:
-                               data7.setSpinalMobility(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data7.setCrp(BigDecimal.valueOf(cellValue));
                                break;
                            case 73:
-                               data7.setCrp(BigDecimal.valueOf(cell.getNumericCellValue()));
+                               data7.setSpinalMobility(BigDecimal.valueOf(cellValue));
                                break;
 
                            case 74:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsas20(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsas20(false);
                                }
                                break;
                            case 75:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsas40(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsas40(false);
                                }
                                break;
                            case 76:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsasPr(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsasPr(false);
                                }
                                break;
                            case 77:
-                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               if (BigDecimal.ONE.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsas56(true);
-                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cell.getNumericCellValue())) == 0){
+                               } else if (BigDecimal.ZERO.compareTo(BigDecimal.valueOf(cellValue)) == 0){
                                    rawData7.setAsas56(false);
                                }
                                break;
@@ -521,9 +528,8 @@ public class ReadExcel {
                          * CRP01       CRP
                          */
 
-                        cell.setCellType(Cell.CELL_TYPE_STRING);
-                        System.out.println("第" + rowIndex + "行      第" + cellNum + "列    内容为：" + cell.getRichStringCellValue().getString());
-                    }
+                        System.out.println("第" + rowIndex + "行      第" + cellNum + "列    内容为：" + cellValue.toString());
+//                    }
                 }
 
                 vo1.setAsas20(AsCalcTools.calcASAS20(baseLine, data1));

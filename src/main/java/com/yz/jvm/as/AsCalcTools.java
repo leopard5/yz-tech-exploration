@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.text.Bidi;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -61,6 +62,9 @@ public class AsCalcTools {
     }
 
     public static Boolean baseCalc(AsCeeDataVO baseLine, AsCeeDataVO twoWeek, double percentage, double score) {
+        setDefaultValue(baseLine, BigDecimal.ZERO);
+        setDefaultValue(twoWeek, BigDecimal.ZERO);
+
         //
         Set<String> fourKeys = new HashSet<>();
         fourKeys.add(ASASConsts.PGA);
@@ -138,6 +142,8 @@ public class AsCalcTools {
     }
 
     public static Boolean calcASASpr(AsCeeDataVO baseLine, AsCeeDataVO twoWeek) {
+        setDefaultValue(baseLine, BigDecimal.ZERO);
+        setDefaultValue(twoWeek, BigDecimal.ZERO);
         return twoWeek.getPga().compareTo(BigDecimal.valueOf(2)) <= 0
                 && twoWeek.getPainScore().compareTo(BigDecimal.valueOf(2)) <= 0
                 && twoWeek.getBasfi().compareTo(BigDecimal.valueOf(2)) <= 0
@@ -145,8 +151,10 @@ public class AsCalcTools {
     }
 
     public static Boolean calcASAS56(AsCeeDataVO baseLine, AsCeeDataVO twoWeek) {
-        Map<String, Boolean> improvementDegree = new HashMap<>();
+        setDefaultValue(baseLine, BigDecimal.ZERO);
+        setDefaultValue(twoWeek, BigDecimal.ZERO);
 
+        Map<String, Boolean> improvementDegree = new HashMap<>();
         if (baseLine.getPga().compareTo(twoWeek.getPga()) > 0) {
             BigDecimal value1 = baseLine.getPga().subtract(twoWeek.getPga()).divide(baseLine.getPga(), 2, BigDecimal.ROUND_HALF_UP);
             if (value1.compareTo(BigDecimal.valueOf(0.2)) >= 0) {
@@ -190,5 +198,26 @@ public class AsCalcTools {
         }
 
         return improvementDegree.size() >= 5;
+    }
+
+    public static void setDefaultValue(AsCeeDataVO vo, BigDecimal def){
+        if (vo.getPga() == null) {
+            vo.setPga(def);
+        }
+        if (vo.getPainScore() == null){
+            vo.setPainScore(def);
+        }
+        if (vo.getBasfi() == null) {
+            vo.setBasfi(def);
+        }
+        if (vo.getInflammatoryReact() == null) {
+            vo.setInflammatoryReact(def);
+        }
+        if (vo.getCrp()==null) {
+            vo.setCrp(def);
+        }
+        if (vo.getSpinalMobility() == null) {
+            vo.setSpinalMobility(def);
+        }
     }
 }
