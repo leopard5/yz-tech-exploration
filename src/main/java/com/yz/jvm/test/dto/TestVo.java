@@ -8,7 +8,9 @@ public class TestVo implements Serializable{
 
     private Integer id;
     private String name;
-    private List<String> ids;
+    private List<String> names;
+    private List<Integer> ids;
+
 
     public Integer getId() {
         return id;
@@ -26,11 +28,19 @@ public class TestVo implements Serializable{
         this.name = name;
     }
 
-    public List<String> getIds() {
+    public List<String> getNames() {
+        return names;
+    }
+
+    public void setNames(List<String> names) {
+        this.names = names;
+    }
+
+    public List<Integer> getIds() {
         return ids;
     }
 
-    public void setIds(List<String> ids) {
+    public void setIds(List<Integer> ids) {
         this.ids = ids;
     }
 }

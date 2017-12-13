@@ -9,6 +9,7 @@ import org.dozer.Mapper;
 import org.springframework.cglib.beans.BeanCopier;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 // 1.BeanCopier
 // 2.org.apache.commons.beanutils.BeanUtils
@@ -28,7 +29,11 @@ public class BeanConvertorTest {
 
     public static void testBeanCopy() {
         TestVo vo = new TestVo();
+        vo.setId(1234);
         vo.setName("abc");
+        vo.setIds(Arrays.asList(1111, 2222));
+        vo.setNames(Arrays.asList("ya", "zhong"));
+
 
         TestReq target = toTestReq(vo);
         System.out.println(JSON.toJSONString(target));
@@ -49,7 +54,6 @@ public class BeanConvertorTest {
             e.printStackTrace();
         } finally {
         }
-
     }
 
     public static void testBeanMapper() {
@@ -66,7 +70,7 @@ public class BeanConvertorTest {
 
     public static void main(String[] args) {
         testBeanCopy();
-        testBeanUtils();
-        testBeanMapper();
+//        testBeanUtils();
+//        testBeanMapper();
     }
 }
