@@ -7,6 +7,7 @@ import scala.util.control.Exception;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TestStream {
@@ -39,5 +40,7 @@ public class TestStream {
 
         Map<Byte, List<TestData>> collect3 = beanList.stream().collect(Collectors.groupingBy(TestData::getType));
         System.out.println(collect3);
+
+        Map<Byte, Set<Integer>> result = beanList.stream().collect(Collectors.groupingBy(TestData::getType, Collectors.mapping(TestData::getId, Collectors.toSet())));
     }
 }
