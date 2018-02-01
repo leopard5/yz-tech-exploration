@@ -4,7 +4,10 @@ import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
-public class Session_Test implements Watcher {
+/**
+ * @author yazhong.qi
+ */
+public class SessionTest implements Watcher {
     final static String SERVER_LIST = "localhost:2182";
 
     static ZooKeeper zookeeper = null;
@@ -12,7 +15,7 @@ public class Session_Test implements Watcher {
     public static void main(String[] args) {
 
         try {
-            zookeeper = new ZooKeeper(SERVER_LIST, 20000, new Session_Test());
+            zookeeper = new ZooKeeper(SERVER_LIST, 20000, new SessionTest());
             while (zookeeper.getState() != ZooKeeper.States.CONNECTED) {
                 Thread.sleep(3000);
                 System.out.println("...");
