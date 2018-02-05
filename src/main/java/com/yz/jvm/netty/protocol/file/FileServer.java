@@ -16,23 +16,18 @@ import io.netty.util.CharsetUtil;
 public class FileServer {
 
     public void run(int port) throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = null;
+        EventLoopGroup workerGroup = null;
         try {
+            bossGroup = new NioEventLoopGroup();
+            workerGroup = new NioEventLoopGroup();
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG, 100)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
-                        /*
-                         * (non-Javadoc)
-                         *
-                         * @see
-                         * io.netty.channel.ChannelInitializer#initChannel(io
-                         * .netty.channel.Channel)
-                         */
-                        public void initChannel(SocketChannel ch)
-                                throws Exception {
+                        @Override
+                        public void initChannel(SocketChannel ch) {
                             ch.pipeline().addLast(
                                     new StringEncoder(CharsetUtil.UTF_8),
                                     new LineBasedFrameDecoder(1024),
@@ -43,10 +38,13 @@ public class FileServer {
             ChannelFuture f = b.bind(port).sync();
             System.out.println("Start file server at port : " + port);
             f.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } finally {
-            // 优雅停机
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
+            bossGroup.close();
+            workerGroup.close();
+//                bossGroup.shutdownGracefully();
+//                workerGroup.shutdownGracefully();
         }
     }
 
