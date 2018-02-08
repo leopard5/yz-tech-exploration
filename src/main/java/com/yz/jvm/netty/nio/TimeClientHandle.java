@@ -32,11 +32,6 @@ public class TimeClientHandle implements Runnable {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Runnable#run()
-     */
     @Override
     public void run() {
         try {
@@ -47,7 +42,7 @@ public class TimeClientHandle implements Runnable {
         }
         while (!stop) {
             try {
-                selector.select(1000);
+                selector.select(500);
                 Set<SelectionKey> selectedKeys = selector.selectedKeys();
                 Iterator<SelectionKey> it = selectedKeys.iterator();
                 SelectionKey key = null;
@@ -55,12 +50,14 @@ public class TimeClientHandle implements Runnable {
                     key = it.next();
                     it.remove();
                     try {
+                        // handleInput
                         handleInput(key);
                     } catch (Exception e) {
                         if (key != null) {
                             key.cancel();
-                            if (key.channel() != null)
+                            if (key.channel() != null) {
                                 key.channel().close();
+                            }
                         }
                     }
                 }
@@ -71,13 +68,13 @@ public class TimeClientHandle implements Runnable {
         }
 
         // 多路复用器关闭后，所有注册在上面的Channel和Pipe等资源都会被自动去注册并关闭，所以不需要重复释放资源
-        if (selector != null)
+        if (selector != null) {
             try {
                 selector.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+        }
     }
 
     private void handleInput(SelectionKey key) throws IOException {
@@ -85,12 +82,12 @@ public class TimeClientHandle implements Runnable {
         if (key.isValid()) {
             // 判断是否连接成功
             SocketChannel sc = (SocketChannel) key.channel();
-            if (key.isConnectable()) {
-                if (sc.finishConnect()) {
-                    sc.register(selector, SelectionKey.OP_READ);
-                    doWrite(sc);
-                } else
-                    System.exit(1);// 连接失败，进程退出
+            if (key.isConnectable() && sc.finishConnect()) {
+                sc.register(selector, SelectionKey.OP_READ);
+                doWrite(sc);
+            } else {
+                // 连接失败，进程退出
+                System.exit(1);
             }
             if (key.isReadable()) {
                 ByteBuffer readBuffer = ByteBuffer.allocate(1024);
@@ -106,8 +103,9 @@ public class TimeClientHandle implements Runnable {
                     // 对端链路关闭
                     key.cancel();
                     sc.close();
-                } else
-                    ; // 读到0字节，忽略
+                } else {
+                    // 读到0字节，忽略
+                }
             }
         }
 
@@ -118,8 +116,9 @@ public class TimeClientHandle implements Runnable {
         if (socketChannel.connect(new InetSocketAddress(host, port))) {
             socketChannel.register(selector, SelectionKey.OP_READ);
             doWrite(socketChannel);
-        } else
+        } else {
             socketChannel.register(selector, SelectionKey.OP_CONNECT);
+        }
     }
 
     private void doWrite(SocketChannel sc) throws IOException {
@@ -128,8 +127,9 @@ public class TimeClientHandle implements Runnable {
         writeBuffer.put(req);
         writeBuffer.flip();
         sc.write(writeBuffer);
-        if (!writeBuffer.hasRemaining())
+        if (!writeBuffer.hasRemaining()) {
             System.out.println("Send order 2 server succeed.");
+        }
     }
 
 }
