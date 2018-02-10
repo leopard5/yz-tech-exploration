@@ -41,11 +41,6 @@ public class MultiplexerTimeServer implements Runnable {
         this.stop = true;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Runnable#run()
-     */
     @Override
     public void run() {
         while (!stop) {
@@ -114,8 +109,9 @@ public class MultiplexerTimeServer implements Runnable {
                     // 对端链路关闭
                     key.cancel();
                     sc.close();
-                } else
-                    ; // 读到0字节，忽略
+                } else {
+                    // read zero byte, ignore
+                }
             }
         }
     }

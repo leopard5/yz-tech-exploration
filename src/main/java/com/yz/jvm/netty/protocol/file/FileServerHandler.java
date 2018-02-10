@@ -13,7 +13,6 @@ public class FileServerHandler extends SimpleChannelInboundHandler<String> {
 
     private static final String CR = System.getProperty("line.separator");
 
-    @Override
     public void messageReceived(ChannelHandlerContext ctx, String msg)
             throws Exception {
         RandomAccessFile randomAccessFile = null;
@@ -47,5 +46,10 @@ public class FileServerHandler extends SimpleChannelInboundHandler<String> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) {
+        return;
     }
 }

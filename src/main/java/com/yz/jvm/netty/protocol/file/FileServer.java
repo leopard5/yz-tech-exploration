@@ -15,7 +15,7 @@ import io.netty.util.CharsetUtil;
 
 public class FileServer {
 
-    public void run(int port) throws Exception {
+    public void run(int port) {
         EventLoopGroup bossGroup = null;
         EventLoopGroup workerGroup = null;
         try {
@@ -41,10 +41,12 @@ public class FileServer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            bossGroup.close();
-            workerGroup.close();
-//                bossGroup.shutdownGracefully();
-//                workerGroup.shutdownGracefully();
+            if (bossGroup != null) {
+                bossGroup.shutdownGracefully();
+            }
+            if (workerGroup != null) {
+                workerGroup.shutdownGracefully();
+            }
         }
     }
 
