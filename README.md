@@ -1,4 +1,4 @@
-com.yz.jvm
+## Technical classification
 - akka
     * CalculatorActor.java
     * CreationActor.java
