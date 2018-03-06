@@ -1,12 +1,12 @@
 package com.yz.jvm.classload;
 
 public class Singleton {
-//    private static Singleton singleton = new Singleton();
+    private static Singleton singleton = new Singleton();
 
     public static int count1;
     public static int count2 = 0;
 
-    private static Singleton singleton = new Singleton();
+//    private static Singleton singleton = new Singleton();
 
     private Singleton() {
         count1++;
