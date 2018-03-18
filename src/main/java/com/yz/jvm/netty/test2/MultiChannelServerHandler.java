@@ -7,7 +7,7 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
-public class MutilChannelServerHandler extends SimpleChannelInboundHandler<String> {
+public class MultiChannelServerHandler extends SimpleChannelInboundHandler<String> {
 
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
@@ -39,5 +39,10 @@ public class MutilChannelServerHandler extends SimpleChannelInboundHandler<Strin
         channel.writeAndFlush("[server]_" + channel.remoteAddress() + " removed \n");
         // netty auto exec this remove func
 //        channelGroup.remove(channel);
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
     }
 }

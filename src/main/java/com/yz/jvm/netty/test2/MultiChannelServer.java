@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * @author yazhong
  * mutil client connect ,one server demo
  */
-public class MutilChannelServer {
+public class MultiChannelServer {
     public static void main(String[] args) {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -18,7 +18,7 @@ public class MutilChannelServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new MutilChannelServerInitializer());
+                    .childHandler(new MultiChannelServerInitializer());
 
             ChannelFuture future = b.bind(9010).sync();
             future.channel().closeFuture().sync();
