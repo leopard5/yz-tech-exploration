@@ -26,6 +26,8 @@ public class IdleStateServerHandler extends ChannelInboundHandlerAdapter {
                     break;
             }
             System.out.println(ctx.channel().remoteAddress() + "timeout event:" + eventType);
+
+            ctx.channel().close();
         }
     }
 }

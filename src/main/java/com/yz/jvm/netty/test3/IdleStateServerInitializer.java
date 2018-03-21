@@ -12,6 +12,6 @@ public class IdleStateServerInitializer extends ChannelInitializer<SocketChannel
     protected void initChannel(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new IdleStateHandler(5, 7, 10, TimeUnit.SECONDS));
-        pipeline.addLast(null);
+        pipeline.addLast(new IdleStateServerHandler());
     }
 }
