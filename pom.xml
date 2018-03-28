@@ -21,9 +21,9 @@
         <fastjson_version>1.2.7</fastjson_version>
         <bsf_version>3.1</bsf_version>
         <sorcerer_version>0.8</sorcerer_version>
-        <zookeeper_version>3.4.6</zookeeper_version>
+        <zookeeper_version>3.4.8</zookeeper_version>
         <zkclient_version>0.1</zkclient_version>
-        <curator_version>2.5.0</curator_version>
+        <curator_version>3.2.1</curator_version>
         <jedis_version>2.6.2</jedis_version>
         <xmemcached_version>1.3.6</xmemcached_version>
         <cxf_version>2.6.1</cxf_version>
@@ -134,22 +134,22 @@
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>
-            <version>3.2.1</version>
+            <version>${curator_version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
-            <version>3.2.1</version>
+            <version>${curator_version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-client</artifactId>
-            <version>3.2.1</version>
+            <version>${curator_version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-test</artifactId>
-            <version>3.2.1</version>
+            <version>${curator_version}</version>
         </dependency>
         <!-- zookeeper end -->
 

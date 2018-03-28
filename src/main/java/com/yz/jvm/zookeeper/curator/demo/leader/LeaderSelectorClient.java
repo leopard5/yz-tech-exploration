@@ -1,12 +1,12 @@
-package com.yz.jvm.curator.demo.leader;
-
-import java.io.Closeable;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+package com.yz.jvm.zookeeper.curator.demo.leader;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.leader.LeaderSelector;
 import org.apache.curator.framework.recipes.leader.LeaderSelectorListenerAdapter;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 本类基于leaderSelector实现,所有存活的client会公平的轮流做leader
@@ -24,11 +24,11 @@ public class LeaderSelectorClient extends LeaderSelectorListenerAdapter implemen
 		leaderSelector.autoRequeue();
 	}
 
-	public void start() throws IOException {
+	public void start() {
 		leaderSelector.start();
 	}
 
-	public void close() throws IOException {
+	public void close() {
 		leaderSelector.close();
 	}
 
@@ -47,7 +47,7 @@ public class LeaderSelectorClient extends LeaderSelectorListenerAdapter implemen
 	/**
 	 * client成为leader后，会调用此方法
 	 */
-	public void takeLeadership(CuratorFramework client) throws Exception {
+	public void takeLeadership(CuratorFramework client) {
 
 		int waitSeconds = (int) (5 * Math.random()) + 1;
 		System.out.println(name + "是当前的leader");

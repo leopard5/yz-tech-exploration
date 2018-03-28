@@ -1,19 +1,18 @@
-package com.yz.jvm.curator.demo.leader;
+package com.yz.jvm.zookeeper.curator.demo.leader;
+
+import com.google.common.collect.Lists;
+import com.yz.jvm.zookeeper.curator.demo.utils.ClientFactory;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.utils.CloseableUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.utils.CloseableUtils;
-
-import com.yz.jvm.curator.demo.utils.ClientFactory;
-import com.google.common.collect.Lists;
-
 /**
  * leader选举
  * 
- * @author shencl
+ * @author yazhong
  */
 public class LeaderSelectorExample {
 
