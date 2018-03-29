@@ -1,6 +1,6 @@
 package com.yz.jvm.netty.test5;
 
-import com.yz.jvm.serialization.protobuf.DataInfo;
+import com.yz.jvm.serialization.protobuf.MyDataInfo;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -14,7 +14,7 @@ public class ProtoBufServerInitializer extends ChannelInitializer<SocketChannel>
     protected void initChannel(SocketChannel ch) {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(new ProtobufVarint32FrameDecoder());
-        pipeline.addLast(new ProtobufDecoder(DataInfo.Person.getDefaultInstance()));
+        pipeline.addLast(new ProtobufDecoder(MyDataInfo.MyMessage.getDefaultInstance()));
         pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast(new ProtobufEncoder());
         pipeline.addLast(new ProtoBufServerHandler());

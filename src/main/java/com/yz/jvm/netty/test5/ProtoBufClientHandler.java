@@ -1,23 +1,60 @@
 package com.yz.jvm.netty.test5;
 
-import com.yz.jvm.serialization.protobuf.DataInfo;
+import com.yz.jvm.serialization.protobuf.MyDataInfo;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public class ProtoBufClientHandler extends SimpleChannelInboundHandler<DataInfo.Person> {
+import java.util.Random;
+
+public class ProtoBufClientHandler extends SimpleChannelInboundHandler<MyDataInfo.MyMessage> {
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, DataInfo.Person msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, MyDataInfo.MyMessage msg) {
 
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        DataInfo.Person person = DataInfo.Person.newBuilder()
-                .setName("yazhong")
-                .setAge(34)
-                .setAddress("shanghai")
-                .build();
+        int randomInt = new Random().nextInt(3);
 
-        ctx.channel().writeAndFlush(person);
+        MyDataInfo.MyMessage myMessage = null;
+        switch (randomInt) {
+            case 0:
+                MyDataInfo.Person person = MyDataInfo.Person.newBuilder()
+                        .setName("harry")
+                        .setAge(34)
+                        .setAddress("shanghai")
+                        .build();
+
+                myMessage = MyDataInfo.MyMessage.newBuilder()
+                        .setDataType(MyDataInfo.MyMessage.DataType.PersonType)
+                        .setPerson(person)
+                        .build();
+                break;
+            case 1:
+                MyDataInfo.Dog dog = MyDataInfo.Dog.newBuilder()
+                        .setName("Dog")
+                        .setAge(5)
+                        .build();
+
+                myMessage = MyDataInfo.MyMessage.newBuilder()
+                        .setDataType(MyDataInfo.MyMessage.DataType.DogType)
+                        .setDog(dog)
+                        .build();
+                break;
+            case 2:
+                MyDataInfo.Cat cat = MyDataInfo.Cat.newBuilder()
+                        .setName("cat")
+                        .setCity("xian")
+                        .build();
+
+                myMessage = MyDataInfo.MyMessage.newBuilder()
+                        .setDataType(MyDataInfo.MyMessage.DataType.CatType)
+                        .setCat(cat)
+                        .build();
+                break;
+            default:
+        }
+
+        ctx.channel().writeAndFlush(myMessage);
     }
 }
