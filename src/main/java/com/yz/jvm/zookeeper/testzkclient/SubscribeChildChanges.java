@@ -29,6 +29,7 @@ public class SubscribeChildChanges {
 		System.out.println("conneted ok!");
 		
 		zc.subscribeChildChanges("/jike20", new ZkChildListener());
+
 		Thread.sleep(Integer.MAX_VALUE);
 		
 		

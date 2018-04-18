@@ -33,8 +33,6 @@ class Document {
     }
 }
 
-/* ......................................................................................... */
-
 class Folder {
     private final List<Folder> subFolders;
     private final List<Document> documents;
@@ -68,9 +66,9 @@ class Folder {
 
 /* ......................................................................................... */
 
-public class WordCounter {    
+public class WordCounter {
 
-/* ......................................................................................... */
+    /* ......................................................................................... */
 
     String[] wordsIn(String line) {
         return line.trim().split("(\\s|\\p{Punct})+");
@@ -87,8 +85,8 @@ public class WordCounter {
         }
         return count;
     }
-    
-/* ......................................................................................... */
+
+    /* ......................................................................................... */
 
     Long countOccurrencesOnSingleThread(Folder folder, String searchedWord) {
         long count = 0;
@@ -101,7 +99,7 @@ public class WordCounter {
         return count;
     }
 
-/* ......................................................................................... */
+    /* ......................................................................................... */
 
     class DocumentSearchTask extends RecursiveTask<Long> {
         private final Document document;
@@ -119,7 +117,7 @@ public class WordCounter {
         }
     }
 
-/* ......................................................................................... */
+    /* ......................................................................................... */
 
     class FolderSearchTask extends RecursiveTask<Long> {
         private final Folder folder;
@@ -151,8 +149,8 @@ public class WordCounter {
             return count;
         }
     }
-        
-/* ......................................................................................... */
+
+    /* ......................................................................................... */
 
     private final ForkJoinPool forkJoinPool = new ForkJoinPool();
 
@@ -160,7 +158,7 @@ public class WordCounter {
         return forkJoinPool.invoke(new FolderSearchTask(folder, searchedWord));
     }
 
-/* ......................................................................................... */
+    /* ......................................................................................... */
 
     public static void main(String[] args) throws IOException {
         WordCounter wordCounter = new WordCounter();
@@ -198,5 +196,3 @@ public class WordCounter {
         System.out.println();
     }
 }
-
-/* ......................................................................................... */

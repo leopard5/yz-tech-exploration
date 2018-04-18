@@ -28,7 +28,6 @@ public class Sums {
             return acc;
         }
     }
-
     public static void main(String[] args) throws Exception {
 
         ExecutorService executor = Executors.newFixedThreadPool(2);

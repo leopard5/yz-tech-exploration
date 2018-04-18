@@ -13,6 +13,6 @@ public class BasicThread {
 
         thread.start();
         thread.join();
-
+        System.out.println("main thread running");
     }
 }
