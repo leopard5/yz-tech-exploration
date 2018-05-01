@@ -1,4 +1,4 @@
-namespace java wu.thrift.bean
+namespace java com.yz.jvm.serialization.thrift
 
 struct Student{
     1: optional i32 id;
@@ -6,3 +6,4 @@ struct Student{
     3: optional string describe;
     4: optional list<string> scores;
 }
+
