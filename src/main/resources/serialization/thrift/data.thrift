@@ -13,5 +13,6 @@ exception DataException {
 }
 
 service PersonService {
-    Person getPersonById(1: required string name);
+    Person getPersonByUserName(1: required string username),
+    void savePerson(1: required Person person)
 }
