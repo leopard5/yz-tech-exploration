@@ -10,9 +10,8 @@ import net.sf.cglib.proxy.MethodProxy;
  * VM args -XX:PermSize=10M -XX:MaxPermSize=10M
  *
  */
-
 public class JavaMethodAreaOOM {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		try {
 			while (true) {
 				Enhancer enhancer = new Enhancer();
