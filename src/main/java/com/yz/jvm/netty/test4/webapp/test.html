@@ -36,18 +36,19 @@
 
     }
 
-    function clear() {
+    function clearResponseText() {
         document.getElementById('responseText').value = '';
     }
 </script>
 
 <form onsubmit="return false;">
+    <h3>client input:</h3>
     <textarea id="message" name="message" style="width: 400px;height: 200px"></textarea>
     <input type="button" value="send data" onclick="send(this.form.message.value)">
 
     <h3>sever output:</h3>
     <textarea id="responseText" style="width: 400px;height: 300px"></textarea>
-    <input type="button" value="clear context" onclick="clear()">
+    <input type="button" value="clear context" onclick="clearResponseText()">
 </form>
 </body>
 </html>
