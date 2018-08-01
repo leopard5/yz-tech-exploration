@@ -6,7 +6,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-
 public class ConditionPrintTest {
 
     static class NumberWrapper {
@@ -55,7 +54,6 @@ public class ConditionPrintTest {
                         System.out.println(num.value);
                         num.value++;
                     }
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
@@ -64,7 +62,6 @@ public class ConditionPrintTest {
             }
 
         });
-
 
         cachedThreadPool.execute(new Runnable() {
             @Override
@@ -95,7 +92,6 @@ public class ConditionPrintTest {
                     lock.unlock();
                 }
             }
-
         });
     }
 }

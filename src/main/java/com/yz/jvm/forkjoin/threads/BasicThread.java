@@ -7,6 +7,12 @@ public class BasicThread {
         Thread thread = new Thread() {
             @Override
             public void run() {
+                try {
+                    Thread.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                }
                 System.out.println(">>> I am running in a separate thread!");
             }
         };
