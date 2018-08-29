@@ -1,8 +1,10 @@
 package com.yz.jvm.queue;
 
+import com.lmax.disruptor.BusySpinWaitStrategy;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
+import com.lmax.disruptor.dsl.ProducerType;
 
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -13,7 +15,8 @@ public class DisruptorMain {
     public static void main(String[] args) {
         ExecutorService exec = Executors.newCachedThreadPool();
         // Preallocate RingBuffer with 1024 ValueEvents
-        Disruptor<ValueEvent> disruptor = new Disruptor<ValueEvent>(ValueEvent.EVENT_FACTORY, 1024, exec);
+        Disruptor<ValueEvent> disruptor = new Disruptor<ValueEvent>(
+                ValueEvent.EVENT_FACTORY, 1024, exec,ProducerType.MULTI, new BusySpinWaitStrategy());
         final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>() {
             // event will eventually be recycled by the Disruptor after it wraps
             public void onEvent(final ValueEvent event, final long sequence, final boolean endOfBatch) throws Exception {
