@@ -21,31 +21,31 @@ public class BeanInitializing implements InitializingBean, DisposableBean {
     private static String password = "";
 
     public BeanInitializing() {
-        System.out.println("BeanInitializing");
+        System.out.println("BeanInitializing constructer");
     }
 
     @PostConstruct
     public void postContruct(){
-        System.out.println("postContruct");
+        System.out.println("PostConstruct annotation");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("afterPropertiesSet");
+        System.out.println("InitializingBean afterPropertiesSet");
     }
 
     public void initMethodTest(){
-        System.out.println("initMethodTest");
+        System.out.println("xml config initMethodTest");
     }
 
     @Override
     public void destroy() throws Exception {
-        System.out.println("destroy");
+        System.out.println("DisposableBean destroy");
     }
 
     @PreDestroy
     public void beforeDestroy(){
-        System.out.println("beforeDestroy");
+        System.out.println("PreDestroy annotation");
     }
 
 }
