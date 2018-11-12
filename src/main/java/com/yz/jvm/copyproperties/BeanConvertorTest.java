@@ -62,7 +62,7 @@ public class BeanConvertorTest {
         TestVo vo = new TestVo();
         vo.setName("abc");
 
-        TestReq target = mapper.map(vo,TestReq.class);
+        TestReq target = mapper.map(vo, TestReq.class);
 
         System.out.println(JSON.toJSONString(target));
     }
