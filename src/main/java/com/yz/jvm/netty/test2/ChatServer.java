@@ -22,8 +22,9 @@ public class ChatServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-//                    .localAddress(new InetSocketAddress(SERVER_PORT))
-                    .childHandler(new ChatServerInitializer());
+                    .localAddress(new InetSocketAddress(SERVER_PORT))
+                    .childHandler(new ChatServerInitializer())
+                    .handler(new ChatClientInitializer());
 
             ChannelFuture future = b.bind(SERVER_PORT).sync();
             future.channel().closeFuture().sync();
