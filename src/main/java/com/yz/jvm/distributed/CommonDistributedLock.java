@@ -10,7 +10,7 @@ public class CommonDistributedLock {
     private final ZooKeeper zk;
     private final String lockBasePath;
     private final String lockName;
-    private String lockPath;
+    private volatile String lockPath;
 
     public CommonDistributedLock(ZooKeeper zk, String lockBasePath, String lockName) {
         this.zk = zk;

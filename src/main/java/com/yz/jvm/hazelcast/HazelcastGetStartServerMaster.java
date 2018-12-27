@@ -19,5 +19,4 @@ public class HazelcastGetStartServerMaster {
         clusterQueue.offer("Hello hazelcast!");
         clusterQueue.offer("Hello hazelcast queue!");
     }
-
 }
