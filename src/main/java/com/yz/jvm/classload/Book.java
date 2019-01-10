@@ -24,7 +24,4 @@ public class Book {
         System.out.println("书的普通代码块");
     }
 
-
-
-
 }

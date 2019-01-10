@@ -5,6 +5,7 @@ import java.util.UUID;
 import java.util.concurrent.*;
 
 import com.alibaba.fastjson.JSON;
+import com.yz.jvm.test.dto.TestReq;
 import org.openjdk.jmh.runner.RunnerException;
 
 import com.yz.jvm.thread.callable.CallableTest;
@@ -42,19 +43,17 @@ public class MainDemo {
 //		vo.setIds(Arrays.asList("tt","yy"));
 //
 
-		try {
-			String strJson = "[4445]";
-			List<Integer> aaaa = JSON.parseArray(strJson, Integer.class);
-			System.out.println(aaaa);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("aaaa");
-		} finally {
-		}
-
+//		try {
+//			String strJson = "[4445]";
+//			List<Integer> aaaa = JSON.parseArray(strJson, Integer.class);
+//			System.out.println(aaaa);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("aaaa");
+//		} finally {
+//		}
 
 	}
-
 
 	public static void test(String name){
 
