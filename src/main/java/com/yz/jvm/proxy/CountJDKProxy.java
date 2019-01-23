@@ -19,10 +19,9 @@ public class CountJDKProxy implements InvocationHandler {
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
-		Object result = null;
-		System.out.println("JDK Proxy事物开始");
-		result = method.invoke(target, args);
-		System.out.println("JDK Proxy事物结束");
+		System.out.println("JDK Proxy before execute");
+		Object result = method.invoke(target, args);
+		System.out.println("JDK Proxy after execute");
 		return result;
 	}
 
@@ -30,6 +29,6 @@ public class CountJDKProxy implements InvocationHandler {
 		CountJDKProxy countJDKProxy = new CountJDKProxy();
 		Count count=(Count)countJDKProxy.bind(new CountImpl());
 		count.queryCount();
-		
+		count.updateCount();
 	}
 }

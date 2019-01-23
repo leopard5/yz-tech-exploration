@@ -1,11 +1,15 @@
 package com.yz.jvm.arthas;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class MathGame {
+    private static final Logger LOGGER = Logger.getLogger(MathGame.class);
+
     private static Random random = new Random();
 
     public int illegalArgumentCount = 0;
@@ -41,6 +45,7 @@ public class MathGame {
     }
 
     public List<Integer> primeFactors(int number) {
+        LOGGER.info("primeFactors start...");
         if (number < 2) {
             illegalArgumentCount++;
             throw new IllegalArgumentException("number is: " + number + ", need >= 2");

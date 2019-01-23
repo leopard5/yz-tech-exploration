@@ -531,6 +531,14 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>4.2.5.RELEASE</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>1.8.13</version>
+        </dependency>
+
     </dependencies>
 
     <build>
