@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TimeServerHandler implements Runnable {
-
     private Socket socket;
 
     public TimeServerHandler(Socket socket) {
@@ -16,13 +17,14 @@ public class TimeServerHandler implements Runnable {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Runnable#run()
      */
     @Override
     public void run() {
         BufferedReader in = null;
         PrintWriter out = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             in = new BufferedReader(new InputStreamReader(
                     this.socket.getInputStream()));
@@ -34,11 +36,9 @@ public class TimeServerHandler implements Runnable {
                 if (body == null)
                     break;
                 System.out.println("The time server receive order : " + body);
-                currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(
-                        System.currentTimeMillis()).toString() : "BAD ORDER";
+                currentTime = sdf.format(new Date());
                 out.println(currentTime);
             }
-
         } catch (Exception e) {
             if (in != null) {
                 try {
@@ -49,7 +49,6 @@ public class TimeServerHandler implements Runnable {
             }
             if (out != null) {
                 out.close();
-                out = null;
             }
             if (this.socket != null) {
                 try {
@@ -57,7 +56,6 @@ public class TimeServerHandler implements Runnable {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                this.socket = null;
             }
         }
     }
