@@ -20,5 +20,4 @@ public class AcceptCompletionHandler implements
         exc.printStackTrace();
         attachment.latch.countDown();
     }
-
 }

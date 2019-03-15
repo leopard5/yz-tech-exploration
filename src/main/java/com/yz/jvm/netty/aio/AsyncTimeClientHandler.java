@@ -116,5 +116,4 @@ public class AsyncTimeClientHandler implements
             e.printStackTrace();
         }
     }
-
 }

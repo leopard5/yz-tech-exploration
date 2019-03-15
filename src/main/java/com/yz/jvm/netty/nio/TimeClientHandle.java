@@ -10,7 +10,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class TimeClientHandle implements Runnable {
-
     private String host;
     private int port;
 
