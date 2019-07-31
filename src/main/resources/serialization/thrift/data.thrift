@@ -1,4 +1,4 @@
-namespace java com.yz.jvm.serialization.thrift
+ namespace java com.yz.jvm.serialization.thrift
 
 struct Person {
     1: optional string username;
