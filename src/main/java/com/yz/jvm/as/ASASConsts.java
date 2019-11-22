@@ -1,11 +1,11 @@
 package com.yz.jvm.as;
 
-public class ASASConsts {
-    public final static String PGA = "pga";
-    public final static String PAINSCORE = "painScore";
-    public final static String BASFI = "basfi";
-    public final static String INFLAMMATORYREACT = "inflammatoryReact";
-    public final static String CRP = "crp";
-    public final static String SPINALMOBILITY = "spinalMobility";
+public abstract class ASASConsts {
+    public static final String PGA = "pga";
+    public static final String PAINSCORE = "painScore";
+    public static final String BASFI = "basfi";
+    public static final String INFLAMMATORYREACT = "inflammatoryReact";
+    public static final String CRP = "crp";
+    public static final String SPINALMOBILITY = "spinalMobility";
 
 }

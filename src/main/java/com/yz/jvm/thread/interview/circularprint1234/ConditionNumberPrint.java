@@ -75,6 +75,7 @@ public class ConditionNumberPrint {
                     e.printStackTrace();
                 }
                 System.out.println(4);
+                System.out.println("---------");
                 sem1.release();
             }
         }

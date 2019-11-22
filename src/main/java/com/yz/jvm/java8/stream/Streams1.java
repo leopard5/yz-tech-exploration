@@ -1,5 +1,7 @@
 package com.yz.jvm.java8.stream;
 
+import org.assertj.core.util.Lists;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +10,7 @@ public class Streams1 {
 
     public static void main(String[] args) {
 
-        List<String> stringCollection = new ArrayList<>();
+        List<String> stringCollection = Lists.newArrayList();
         stringCollection.add("ddd2");
         stringCollection.add("aaa2");
         stringCollection.add("bbb1");
