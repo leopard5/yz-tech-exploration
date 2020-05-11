@@ -565,6 +565,13 @@
             <artifactId>seata-all</artifactId>
             <version>${seata.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.sun.tools.btrace</groupId>
+            <artifactId>btrace-boot</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
