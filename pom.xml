@@ -70,7 +70,7 @@
         <spring-boot-starter.rocketmq>0.1.0</spring-boot-starter.rocketmq>
         <drools.version>7.1.0.Final</drools.version>
         <guava.version>21.0</guava.version>
-        <commons-io.version>2.5</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-codec.version>1.10</commons-codec.version>
         <springfox.version>2.9.2</springfox.version>
         <mybatis-spring-boot-starter.version>1.2.0</mybatis-spring-boot-starter.version>
