@@ -31,7 +31,8 @@ public class Sums {
     
     public static void main(String[] args) throws Exception {
         
-        ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor =
+                Executors.newFixedThreadPool(2);
         List<Future<Long>> results = executor.invokeAll(asList(
             new Sum(0, 10), new Sum(100, 1_000), new Sum(10_000, 1_000_000)
         ));

@@ -11,11 +11,18 @@ import org.springframework.cglib.beans.BeanCopier;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
-// 1.BeanCopier
-// 2.org.apache.commons.beanutils.BeanUtils
-// BeanUtils.copyProperties VS PropertyUtils.copyProperties
-// 3.Dozer
-public class BeanConvertorTest {
+/**
+ * performance test rank
+ * 0. mapstruct
+ * 1. get set
+ * 2. BeanCopier
+ * 3. Easy mapper
+ * 4. Spring BeanUtils
+ * 5. Apache BeanUtils
+ * 6. Apache PropertiesUtils
+ * 7. Dozer
+ */
+public class BeanConvertTest {
     private static final BeanCopier TEST_REQ = BeanCopier.create(TestVo.class, TestReq.class, false);
 
     public static TestReq toTestReq(TestVo vo) {
@@ -48,11 +55,8 @@ public class BeanConvertorTest {
             BeanUtils.copyProperties(target, vo);
 
             System.out.println(JSON.toJSONString(target));
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } finally {
         }
     }
 
@@ -68,9 +72,15 @@ public class BeanConvertorTest {
     }
 
 
+    public static void testPropertyUtils() {
+
+    }
+
     public static void main(String[] args) {
         testBeanCopy();
 //        testBeanUtils();
 //        testBeanMapper();
     }
+
+
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.CyclicBarrier;
  *
  * @author yazhong
  * @version 1.0
- * @see
+ * @see 1
  * @since JDK 1.7
  */
 public class CyclicBarrierTest {

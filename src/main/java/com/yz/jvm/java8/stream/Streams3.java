@@ -1,5 +1,8 @@
 package com.yz.jvm.java8.stream;
 
+
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +13,7 @@ public class Streams3 {
     public static final int MAX = 1000000;
 
     public static void sortSequential() {
-        List<String> values = new ArrayList<>(MAX);
+        List<String> values = Lists.newArrayListWithCapacity(MAX);
         for (int i = 0; i < MAX; i++) {
             UUID uuid = UUID.randomUUID();
             values.add(uuid.toString());

@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class GuavrRetrying {
+public class GuavaRetrying {
 
     public static void main(String[] args) {
         Callable<Boolean> callable = new Callable<Boolean>() {

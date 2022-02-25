@@ -2,6 +2,11 @@ package com.yz.jvm.guava;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import java.util.List;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -87,5 +92,12 @@ public class GuavaTest {
 
     public void setRating(Double rating) {
         Double r = checkNotNull(rating);
+    }
+
+    public void hashMap() {
+        Map map = Maps.newHashMapWithExpectedSize(10);
+
+        List<String> goods = Lists.newArrayListWithExpectedSize(30);
+        Lists.partition(goods, 20);
     }
 }

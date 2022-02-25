@@ -1,4 +1,4 @@
-package com.yz.jvm.generic_paradigm;
+package com.yz.jvm.generic_paradigm.test1;
 
 public class Plate<T>{
     private T item;

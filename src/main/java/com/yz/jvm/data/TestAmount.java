@@ -1,5 +1,8 @@
 package com.yz.jvm.data;
 
+import lombok.Data;
+
+@Data
 public class TestAmount {
     /**
      * channelId : 领取优惠券的渠道ID
@@ -16,27 +19,4 @@ public class TestAmount {
      */
     private int amount;
 
-    public Byte getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(Byte channelId) {
-        this.channelId = channelId;
-    }
-
-    public Byte getSubChannelId() {
-        return subChannelId;
-    }
-
-    public void setSubChannelId(Byte subChannelId) {
-        this.subChannelId = subChannelId;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 }
